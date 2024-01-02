@@ -1,0 +1,4 @@
+Display the topology as part of the process map (mostly intended for
+developers) just before launch.
+
+Deprecated: This option is deprecated.  Please use "--display topo".

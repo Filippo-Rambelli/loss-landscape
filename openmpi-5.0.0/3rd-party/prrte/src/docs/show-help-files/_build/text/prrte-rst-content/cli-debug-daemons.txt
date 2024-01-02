@@ -1,0 +1,3 @@
+Debug daemon output enabled. This is a somewhat limited stream of
+information normally used to simply confirm that the daemons started.
+Includes leaving the output streams open.

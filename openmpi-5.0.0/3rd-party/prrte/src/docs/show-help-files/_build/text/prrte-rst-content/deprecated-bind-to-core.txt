@@ -1,0 +1,3 @@
+Bind each process to its own core.
+
+Deprecated: This option is deprecated.  Please use "--bind-to core".

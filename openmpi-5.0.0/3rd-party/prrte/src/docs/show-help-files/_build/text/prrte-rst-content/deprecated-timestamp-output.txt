@@ -1,0 +1,4 @@
+Timestamp all application process output.
+
+Deprecated: This option is deprecated.  Please use "--output
+timestamp".

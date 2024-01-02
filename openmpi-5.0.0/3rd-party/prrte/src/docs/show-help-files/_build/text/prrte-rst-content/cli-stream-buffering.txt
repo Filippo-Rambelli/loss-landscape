@@ -1,0 +1,7 @@
+Adjust buffering for stdout/stderr.  Allowable values:
+
+* 0: unbuffered
+
+* 1: line buffered
+
+* 2: fully buffered

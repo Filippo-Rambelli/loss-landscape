@@ -1,0 +1,3 @@
+Provide all output in XML format.
+
+Deprecated: This option is deprecated.  Please use "--output".

@@ -1,0 +1,5 @@
+Disable automatic "--prefix" behavior. PRRTE automatically sets the
+prefix for remote daemons if it was either configured with the "--
+enable-prte-prefix-by-default" option OR prte itself was executed with
+an absolute path to the "prte" command. This option disables that
+behavior.

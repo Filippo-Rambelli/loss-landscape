@@ -1,0 +1,5 @@
+Display a detailed list (mostly intended for developers) of the
+allocation being used by this job.
+
+Deprecated: This option is deprecated.  Please use "--display alloc-
+devel".

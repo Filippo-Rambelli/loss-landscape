@@ -1,0 +1,3 @@
+Merge stderr to stdout for each process.
+
+Deprecated: This option is deprecated.  Please use "--output merge"

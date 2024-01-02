@@ -1,0 +1,4 @@
+Pass a PMIx MCA parameter
+
+Syntax: "--pmixmca <key> <value>", where "key" is the parameter name
+and "value" is the parameter value.

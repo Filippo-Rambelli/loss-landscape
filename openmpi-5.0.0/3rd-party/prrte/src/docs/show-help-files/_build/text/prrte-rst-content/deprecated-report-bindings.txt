@@ -1,0 +1,4 @@
+Display process bindings to stderr.
+
+Deprecated: This option is deprecated.  Please use "--display
+bindings".

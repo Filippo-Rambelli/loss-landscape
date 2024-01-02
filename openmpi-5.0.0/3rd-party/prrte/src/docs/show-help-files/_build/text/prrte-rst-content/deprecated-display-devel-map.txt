@@ -1,0 +1,5 @@
+Display a detailed process map (mostly intended for developers) just
+before launch.
+
+Deprecated: This option is deprecated.  Please use "--display map-
+devel".

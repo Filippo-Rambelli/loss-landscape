@@ -1,0 +1,10 @@
+Redirect output from application processes into
+"filename/job/rank/std[out,err,diag]". A relative path value will be
+converted to an absolute path. The directory name may include a colon
+followed by a comma-delimited list of optional case-insensitive
+directives. Supported directives currently include "NOJOBID" (do not
+include a job-id directory level) and "NOCOPY" (do not copy the output
+to the stdout/err streams).
+
+Deprecated: This option is deprecated.  Please use "--output
+dir=<path>".

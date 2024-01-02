@@ -1,0 +1,4 @@
+Pass a PRRTE MCA parameter.
+
+Syntax: "--prtemca <key> <value>", where "key" is the parameter name
+and "value" is the parameter value.

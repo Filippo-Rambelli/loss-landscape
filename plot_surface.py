@@ -23,6 +23,7 @@ import plot_1D
 import model_loader
 import scheduler
 import mpi4pytorch as mpi
+import h5py
 
 def name_surface_file(args, dir_file):
     # skip if surf_file is specified in args
@@ -54,12 +55,13 @@ def setup_surface_file(args, surf_file, dir_file):
             f.close()
             print ("%s is already set up" % surf_file)
             return
+        f.close()  # Close the file here if it doesn't contain the necessary keys
 
     f = h5py.File(surf_file, 'a')
     f['dir_file'] = dir_file
 
     # Create the coordinates(resolutions) at which the function is evaluated
-    xcoordinates = np.linspace(args.xmin, args.xmax, num=args.xnum)
+    xcoordinates = np.linspace(args.xmin, args.xmax, num=int(args.xnum))
     f['xcoordinates'] = xcoordinates
 
     if args.y:
@@ -68,6 +70,7 @@ def setup_surface_file(args, surf_file, dir_file):
     f.close()
 
     return surf_file
+
 
 
 def crunch(surf_file, net, w, s, d, dataloader, loss_key, acc_key, comm, rank, args):

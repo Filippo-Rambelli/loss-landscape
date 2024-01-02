@@ -1,0 +1,3 @@
+Tag all output with "[job,rank]".
+
+Deprecated: This option is deprecated.  Please use "--output".
