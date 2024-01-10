@@ -4,13 +4,40 @@ from torchvision import transforms
 import os
 import numpy as np
 import argparse
+from pl_bolts.transforms.dataset_normalizations import cifar10_normalization
+from torchvision.transforms.v2 import Resize, Compose, RandomCrop, RandomHorizontalFlip, ToDtype, ToImage
+from pl_bolts.datamodules import MNISTDataModule, CIFAR10DataModule
+
+
+
+def get_cifar_transforms():
+    train_transforms = Compose(
+        [
+            RandomCrop(32, padding=4),
+            RandomHorizontalFlip(),
+            ToImage(), ToDtype(torch.float32, scale=True),
+            cifar10_normalization(),
+        ]
+    )
+    test_transforms = Compose([ToImage(), ToDtype(torch.float32, scale=True), cifar10_normalization()])
+    return train_transforms, test_transforms
+
+
+
+
+
+
+
+
+
+
 
 def get_relative_path(file):
     script_dir = os.path.dirname(__file__)  # <-- absolute dir the script is in
     return os.path.join(script_dir, file)
 
 
-def load_dataset(dataset='cifar10', datapath='cifar10/data', batch_size=128, \
+def load_dataset(dataset='cifar10', datapath='cifar10/data', batch_size=512, \
                  threads=2, raw_data=False, data_split=1, split_idx=0, \
                  trainloader_path="", testloader_path=""):
     """
@@ -25,6 +52,14 @@ def load_dataset(dataset='cifar10', datapath='cifar10/data', batch_size=128, \
     Returns:
         train_loader, test_loader
     """
+
+    datamodule = CIFAR10DataModule(normalize=True, val_split=0.1,
+                                     num_workers=0, batch_size=batch_size, seed=42)
+    datamodule.prepare_data()
+    datamodule.setup('fit')
+    datamodule.setup('test')
+    
+    return datamodule.train_dataloader(), datamodule.test_dataloader()
 
     # use specific dataloaders
     if trainloader_path and testloader_path:

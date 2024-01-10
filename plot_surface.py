@@ -65,7 +65,7 @@ def setup_surface_file(args, surf_file, dir_file):
     f['xcoordinates'] = xcoordinates
 
     if args.y:
-        ycoordinates = np.linspace(args.ymin, args.ymax, num=args.ynum)
+        ycoordinates = np.linspace(args.ymin, args.ymax, num=int(args.ynum))
         f['ycoordinates'] = ycoordinates
     f.close()
 
@@ -227,6 +227,12 @@ if __name__ == '__main__':
         torch.cuda.set_device(rank % gpu_count)
         print('Rank %d use GPU %d of %d GPUs on %s' %
               (rank, torch.cuda.current_device(), gpu_count, socket.gethostname()))
+        
+        if torch.cuda.is_available():
+            print("CUDA is available")
+            print("Current device:", torch.cuda.current_device())
+        else:
+            print("CUDA is not available")
 
     #--------------------------------------------------------------------------
     # Check plotting resolution
@@ -276,8 +282,8 @@ if __name__ == '__main__':
     # Setup dataloader
     #--------------------------------------------------------------------------
     # download CIFAR10 if it does not exit
-    if rank == 0 and args.dataset == 'cifar10':
-        torchvision.datasets.CIFAR10(root=args.dataset + '/data', train=True, download=True)
+    #if rank == 0 and args.dataset == 'cifar10':
+    #    torchvision.datasets.CIFAR10(root=args.dataset + '/data', train=True, download=True)
 
     mpi.barrier(comm)
 
@@ -290,7 +296,7 @@ if __name__ == '__main__':
     # Start the computation
     #--------------------------------------------------------------------------
     crunch(surf_file, net, w, s, d, trainloader, 'train_loss', 'train_acc', comm, rank, args)
-    # crunch(surf_file, net, w, s, d, testloader, 'test_loss', 'test_acc', comm, rank, args)
+    crunch(surf_file, net, w, s, d, testloader, 'test_loss', 'test_acc', comm, rank, args)
 
     #--------------------------------------------------------------------------
     # Plot figures
